@@ -1,0 +1,8 @@
+fastapi[standard]
+uvicorn[standard]
+passlib[bcrypt]
+beanie
+authx
+flake8
+aiohttp
+motor

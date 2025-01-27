@@ -1,0 +1,17 @@
+from fastapi import APIRouter, Depends
+
+from schemas.auth import LoginSchema, RegisterSchema
+from schemas.token import TokenSchema
+from services.auth import AuthService
+
+router = APIRouter(prefix='/auth', tags=['auth'])
+
+
+@router.post('/login', response_model=TokenSchema, status_code=201)
+async def login(payload: LoginSchema, service: AuthService = Depends()):
+    return await service.login(payload)
+
+
+@router.post('/register', status_code=201)
+async def register(payload: RegisterSchema, service: AuthService = Depends()):
+    return await service.register(payload)
