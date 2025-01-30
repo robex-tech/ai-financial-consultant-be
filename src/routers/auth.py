@@ -1,4 +1,6 @@
-from fastapi import APIRouter, Depends
+from typing import Annotated
+
+from fastapi import APIRouter, Depends, Form
 
 from schemas.auth import LoginSchema, RegisterSchema
 from schemas.token import TokenSchema
@@ -8,7 +10,7 @@ router = APIRouter(prefix='/auth', tags=['auth'])
 
 
 @router.post('/login', response_model=TokenSchema, status_code=201)
-async def login(payload: LoginSchema, service: AuthService = Depends()):
+async def login(payload: Annotated[LoginSchema, Form()], service: AuthService = Depends()):
     return await service.login(payload)
 
 

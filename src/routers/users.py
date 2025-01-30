@@ -1,11 +1,19 @@
 from fastapi import APIRouter
 from fastapi.params import Depends
+from config.auth import auth
+from dependencies.user import get_current_user
 
-from services.users import UserService
+router = APIRouter(prefix='/users', dependencies=[Depends(auth.access_token_required)])
 
-router = APIRouter(prefix='/users')
+@router.get('/me')
+async def current_user():
+    return {
+        "message": "Успішно отримано дані користувача",
+    }
 
 
-@router.get('/{email}/')
-async def get_user(email: str, service: UserService = Depends()):
-    return await service.get(email)
+@router.get('/profile')
+def get_profile(payload: dict = Depends(get_current_user)):
+    return {
+        "id": payload,
+    }
