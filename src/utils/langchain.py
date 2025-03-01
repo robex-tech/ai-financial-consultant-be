@@ -1,5 +1,6 @@
 from langchain_community.chat_models import ChatOpenAI
-from langchain.prompts import ChatPromptTemplate, HumanMessagePromptTemplate, MessagesPlaceholder, SystemMessagePromptTemplate
+from langchain.prompts import (ChatPromptTemplate, HumanMessagePromptTemplate,
+                               MessagesPlaceholder, SystemMessagePromptTemplate)
 from langchain.chains import ConversationChain
 from langchain.memory import ConversationBufferMemory
 
@@ -29,5 +30,3 @@ def initialize_langchain():
     prompt = ChatPromptTemplate.from_messages(messages)
     conversation = ConversationChain(memory=memory, prompt=prompt, llm=llm)
     return conversation
-
-

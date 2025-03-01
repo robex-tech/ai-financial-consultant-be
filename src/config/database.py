@@ -9,4 +9,3 @@ from documents.dialogs import Dialog
 async def init_db():
     client = AsyncIOMotorClient("mongodb://admin:password@localhost:27017")
     await init_beanie(database=client.get_database(settings.db_name), document_models=[User, Dialog])
-

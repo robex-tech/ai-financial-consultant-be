@@ -8,6 +8,7 @@ router = APIRouter(
     dependencies=[token_dependency]
 )
 
+
 @router.get('/me')
 def get_user_profile(current_user: CurrentUser):
     return current_user

@@ -33,4 +33,3 @@ class AuthService:
 
         token = auth.create_access_token(uid=str(user.id), data={"email": user.email})
         return TokenSchema(access_token=token, type='bearer')
-

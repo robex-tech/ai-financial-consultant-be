@@ -8,6 +8,7 @@ from schemas.users import UserSchema
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl='auth/login')
 
+
 async def get_current_user(request: Request, token: str = Depends(oauth2_scheme)) -> UserSchema:
     try:
         token_data = await auth.access_token_required(request)
