@@ -1,5 +1,7 @@
+from beanie import PydanticObjectId
+
 from documents.users import User
-from schemas.users import UserSchema, UserCreateSchema
+from schemas.users import UserSchema, UserCreateSchema, UserUpdateSchema
 
 
 class UserRepository:
@@ -11,3 +13,15 @@ class UserRepository:
     async def get(self, email: str):
         user = await User.find_one(User.email == email)
         return user
+
+    async def get_by_id(self, user_id: str):
+        user = await User.find_one(User.id == PydanticObjectId(user_id))
+        return user
+
+    async def update(self, user_id: str, payload: UserUpdateSchema):
+        update_user = await User.find_one(
+            User.id == PydanticObjectId(user_id)
+        ).update(
+            {"$set": payload.model_dump(exclude_none=True)}
+        )
+        return update_user
