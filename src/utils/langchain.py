@@ -15,11 +15,7 @@ def initialize_langchain():
         openai_api_key=settings.open_api_key
     )
 
-    system_template = """
-    Ти - корисний асистент, який відповідає на питання про ФОП в Україні.
-    Використовуй надану історію розмови для контексту.
-    Відповідай чітко та коротко.
-    """
+    system_template = settings.system_template
 
     messages = [
         SystemMessagePromptTemplate.from_template(system_template),

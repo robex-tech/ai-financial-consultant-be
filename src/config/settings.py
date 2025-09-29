@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     db_password: str = Field(env='DB_PASSWORD')
 
     open_api_key: str = Field(env='OPEN_API_KEY')
+    system_template: str = Field(env='SYSTEM_TEMPLATE')
 
     model_config = SettingsConfigDict(env_file='../.env', env_file_encoding='utf-8')
 
